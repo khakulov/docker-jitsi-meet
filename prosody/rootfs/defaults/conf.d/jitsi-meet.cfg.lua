@@ -195,7 +195,6 @@ Component "{{ .Env.XMPP_MUC_DOMAIN }}" "muc"
     storage = "memory"
     modules_enabled = {
         "muc_meeting_id";
-        "muc_domain_mapper";
         {{ if .Env.XMPP_MUC_MODULES }}
         "{{ join "\";\n\"" (splitList "," .Env.XMPP_MUC_MODULES) }}";
         {{ end }}
@@ -211,9 +210,7 @@ Component "focus.{{ .Env.XMPP_DOMAIN }}" "client_proxy"
     target_address = "{{ .Env.JICOFO_AUTH_USER }}@{{ .Env.XMPP_AUTH_DOMAIN }}"
 
 Component "speakerstats.{{ .Env.XMPP_DOMAIN }}" "speakerstats_component"
-    muc_component = "{{ .Env.
-
-}}"
+    muc_component = "{{ .Env.XMPP_MUC_DOMAIN }}"
 
 Component "conferenceduration.{{ .Env.XMPP_DOMAIN }}" "conference_duration_component"
     muc_component = "{{ .Env.XMPP_MUC_DOMAIN }}"
